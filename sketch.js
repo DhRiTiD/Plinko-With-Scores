@@ -47,23 +47,17 @@ function setup() {
 function draw() {
   Engine.update(engine);
   
-  reset = createButton('Reset');
-  reset.position(720, 30);
-  reset.mousePressed(()=>{
-  gameState = "play";
-  count = 0;
-  score = 0;
-}); 
-
   if(gameState === "play"){
     
   background(bG);
+  
+  text(mouseX+","+mouseY,mouseX-5,mouseY-5);
       //text for scores  
       
     fill(255);
     textSize(35);
     text("Score : "+score,20,30);
-    text(" 10 ", 5, 550);
+    text(" 50 ", 5, 550);
     text(" 500 ", 80, 550);
     text(" 500 ", 160, 550);
     text(" 600 ", 240, 550);
@@ -72,7 +66,7 @@ function draw() {
     text(" 100 ", 480, 550);
     text(" 200 ", 560, 550);
     text(" 200 ", 640, 550); 
-    text(" 10 ", 720, 550); 
+    text(" 50 ", 720, 550); 
 
    for (var i = 0; i < plinkos.length; i++) {
     plinkos[i].display();
@@ -86,36 +80,59 @@ function draw() {
       particle.display();
     
       if (particle.body.position.y>550){
-        if (particle.body.position.x < 300 && particle.body.position.x > 60){
+        if (particle.body.position.x > 0 && particle.body.position.x < 85){
+          score = score+50;      
+          particle = null;
+        }else if (particle.body.position.x > 85 && particle.body.position.x < 240){
           score = score+500;      
           particle = null;
-
-        }else if (particle.body.position.x < 310 && particle.body.position.x > 520 ) {
+        }else if (particle.body.position.x > 240 && particle.body.position.x < 325 ){
+          score = score + 600;
+          particle = null;
+        }else if (particle.body.position.x > 310 && particle.body.position.x < 520 ) {
           score = score + 100;
           particle=null;
-
-        }else if (particle.body.position.x < 550 && particle.body.position.x > 680 ){
+        }else if (particle.body.position.x > 550 && particle.body.position.x < 680 ){
           score = score + 200;
           particle = null;
-        }                           
+        } else if (particle.body.position.x > 725 && particle.body.position.x < 800 ){
+          score = score + 50;
+          particle = null;
+        }else if (particle.body.position.x > 800){
+          score = score + 10;
+          particle = null;
+        }else if (particle.body.position.x < 0){
+          score = score + 10;
+          particle = null;
+        }                             
       }
+    }
+
       if (count >= 6){     
         gameState = "end";
       } 
       console.log(count);
-      if(gameState !== "play"){
-        background(GO);
+    }else if(gameState === "end"){
+        background(GO);          
+        reset = createButton('RESET');
+        reset.position(720, 30);
+        reset.mousePressed(()=>{
+        gameState = "play";
+        count = 0;
+        score = 0;
+      }); 
+
         fill(255);
         textSize(35);
         text("Score : "+score,20,30);
         text("Well Done!!", 310, 680);
         text("Click On 'Reset' to Retry!", 235, 750);
       }
-    }
+    
     /*for (var j = 0; j < particles.length; j++) {
        particles[j].display();
     }*/
-  }
+  
 }
 
 function mousePressed(){

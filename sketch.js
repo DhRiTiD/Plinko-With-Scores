@@ -85,16 +85,16 @@ function draw() {
     if(particle!=null){
       particle.display();
     
-      if (particle.body.position.y>760){
-        if (particle.body.position.x < 300){
+      if (particle.body.position.y>550){
+        if (particle.body.position.x < 300 && particle.body.position.x > 60){
           score = score+500;      
           particle = null;
 
-        }else if (particle.body.position.x < 600 && particle.body.position.x > 301 ) {
+        }else if (particle.body.position.x < 310 && particle.body.position.x > 520 ) {
           score = score + 100;
           particle=null;
 
-        }else if (particle.body.position.x < 900 && particle.body.position.x > 601 ){
+        }else if (particle.body.position.x < 550 && particle.body.position.x > 680 ){
           score = score + 200;
           particle = null;
         }                           

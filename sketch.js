@@ -119,7 +119,7 @@ function draw() {
 }
 
 function mousePressed(){
-  if(gameState === "play" && mouse.x<800 && mouse.y<800 ){
+  if(gameState === "play" && mouseX<800 && mouseY<800 ){
     count++;
     particle = new Particle(mouseX, 10, 10, 10); 
   }  
